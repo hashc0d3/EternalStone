@@ -1,0 +1,38 @@
+{
+  "name": "eternal-stone",
+  "private": true,
+  "packageManager": "pnpm@10.15.1",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "lint": "turbo run lint",
+    "typecheck": "turbo run typecheck",
+    "db:up": "docker compose -f docker-compose.dev.yml up -d",
+    "db:down": "docker compose -f docker-compose.dev.yml down",
+    "prod:up": "docker compose up -d --build",
+    "prod:down": "docker compose down",
+    "db:push": "pnpm --filter @eternal-stone/api exec prisma db push",
+    "db:migrate": "pnpm --filter @eternal-stone/api prisma:migrate",
+    "db:seed": "pnpm --filter @eternal-stone/api prisma:seed",
+    "db:studio": "pnpm --filter @eternal-stone/api prisma:studio"
+  },
+  "devDependencies": {
+    "prettier": "^3.6.2",
+    "turbo": "^2.5.6",
+    "typescript": "^5.8.3"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "@nestjs/core",
+      "@prisma/client",
+      "@prisma/engines",
+      "esbuild",
+      "prisma",
+      "sharp",
+      "unrs-resolver"
+    ]
+  }
+}

@@ -1,0 +1,17 @@
+node_modules
+.turbo
+dist
+.next
+out
+coverage
+*.log
+.env
+.env.local
+.env.*.local
+apps/api/uploads/**
+!apps/api/uploads/.gitkeep
+*.tsbuildinfo
+.DS_Store
+Thumbs.db
+prisma/*.db
+prisma/*.db-journal
