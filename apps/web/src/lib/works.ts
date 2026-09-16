@@ -7,12 +7,12 @@ export type WorkPhoto = {
 };
 
 const FALLBACK: WorkPhoto[] = [
-  { src: '/images/catalog/1.png', href: '/works', alt: '' },
-  { src: '/images/catalog/2.png', href: '/works', alt: '' },
-  { src: '/images/catalog/3.jpg', href: '/works', alt: '' },
-  { src: '/images/catalog/4.png', href: '/works', alt: '' },
-  { src: '/images/catalog/5.jpg', href: '/works', alt: '' },
-  { src: '/images/slider/2.png', href: '/works', alt: '' },
+  { src: '/images/works/orig-1.png', href: '/works', alt: '' },
+  { src: '/images/works/orig-2.png', href: '/works', alt: '' },
+  { src: '/images/works/orig-3.jpg', href: '/works', alt: '' },
+  { src: '/images/works/orig-4.png', href: '/works', alt: '' },
+  { src: '/images/works/orig-5.jpg', href: '/works', alt: '' },
+  { src: '/images/works/orig-6.png', href: '/works', alt: '' },
 ];
 
 type WorkList = {

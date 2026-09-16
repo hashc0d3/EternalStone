@@ -16,11 +16,8 @@ export async function WorksPreview() {
 
       <WorksGrid photos={photos} />
 
-      <Link
-        href="/works"
-        className="flex min-h-[72px] w-full items-center justify-center gap-3 border-t border-white/10 bg-[#111] text-sm uppercase tracking-[0.22em] text-white transition-colors hover:bg-white/10"
-      >
-        <span className="h-2 w-2 bg-white" aria-hidden="true" />
+      <Link href="/works" className="btn-bar group">
+        <span className="mark-sq" aria-hidden="true" />
         Больше работ
       </Link>
     </section>

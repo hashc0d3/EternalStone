@@ -93,7 +93,7 @@ export function SiteHeader() {
           })}
           <a
             href={PHONE_HREF}
-            className="inline-flex h-10 items-center border border-white/35 px-4 text-[13px] tracking-[0.06em] text-white transition-colors duration-300 hover:border-white hover:bg-white hover:text-[#1a1a1a]"
+            className="inline-flex h-10 items-center border border-white/75 bg-black/40 px-4 text-[13px] tracking-[0.06em] text-white transition-colors duration-300 hover:bg-white hover:text-[#1a1a1a]"
           >
             {PHONE_LABEL}
           </a>
@@ -102,7 +102,7 @@ export function SiteHeader() {
         <div className="flex min-[1200px]:hidden items-center gap-3 sm:gap-4">
           <a
             href={PHONE_HREF}
-            className="inline-flex h-9 items-center border border-white/35 px-3 text-[12px] tracking-[0.04em] text-white sm:text-[13px]"
+            className="inline-flex h-9 items-center border border-white/75 bg-black/40 px-3 text-[12px] tracking-[0.04em] text-white transition-colors duration-300 hover:bg-white hover:text-[#1a1a1a] sm:text-[13px]"
           >
             {PHONE_LABEL}
           </a>

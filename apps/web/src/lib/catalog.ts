@@ -13,7 +13,7 @@ export const RETAIL_CARDS = [
   },
   {
     href: '/catalog?type=плитки',
-    image: '/images/catalog/3.jpg',
+    image: '/images/catalog/3.png',
     title: 'Плитка для могил',
   },
   {
@@ -24,7 +24,7 @@ export const RETAIL_CARDS = [
   },
   {
     href: '/catalog?type=комплексы',
-    image: '/images/catalog/5.jpg',
+    image: '/images/catalog/5.png',
     title: 'Комплексы',
   },
 ] as const;
@@ -44,7 +44,7 @@ export const OPT_CARDS = [
   },
   {
     href: '/catalog?view=opt&type=плитки',
-    image: '/images/catalog/3.jpg',
+    image: '/images/catalog/3.png',
     title: 'Плитка для могил',
   },
 ] as const;

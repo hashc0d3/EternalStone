@@ -5,10 +5,10 @@ import { CatalogCard } from '@/components/catalog-card';
 import { LeadModal } from '@/components/lead-modal';
 
 const SERVICES = [
-  { title: 'Установка памятника и облицовка могил' },
+  { title: 'Установка памятника и облицовка могил', image: '/images/services/install.png' },
   { title: 'Бесплатные консультации, выезд, замер', image: '/images/services/1.png' },
   { title: 'Доставка', image: '/images/services/2.png' },
-  { title: 'Разработка макетов для могильных комплексов' },
+  { title: 'Разработка макетов для могильных комплексов', image: '/images/services/layouts.png' },
 ] as const;
 
 export function ServicesSection({ heading: Heading = 'h2' }: { heading?: 'h1' | 'h2' }) {
@@ -26,12 +26,12 @@ export function ServicesSection({ heading: Heading = 'h2' }: { heading?: 'h1' | 
 
       <div className="grid min-h-0 flex-1 gap-px bg-black lg:grid-rows-2">
         <div className="grid min-h-[220px] gap-px lg:min-h-0 lg:grid-cols-[1.4fr_1fr]">
-          <CatalogCard featured title={install.title} onClick={() => setSelected(install.title)} />
+          <CatalogCard featured title={install.title} image={install.image} onClick={() => setSelected(install.title)} />
           <CatalogCard featured title={consult.title} image={consult.image} onClick={() => setSelected(consult.title)} />
         </div>
         <div className="grid min-h-[220px] gap-px lg:min-h-0 lg:grid-cols-[1fr_1.4fr]">
           <CatalogCard featured title={delivery.title} image={delivery.image} onClick={() => setSelected(delivery.title)} />
-          <CatalogCard featured title={layouts.title} onClick={() => setSelected(layouts.title)} />
+          <CatalogCard featured title={layouts.title} image={layouts.image} onClick={() => setSelected(layouts.title)} />
         </div>
       </div>
 

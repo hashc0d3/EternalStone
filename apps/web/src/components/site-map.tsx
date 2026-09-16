@@ -16,7 +16,7 @@ export function SiteMap({ className }: { className?: string }) {
           href={YANDEX_MAPS_HREF}
           target="_blank"
           rel="noreferrer"
-          className="pointer-events-auto bg-[#1a1a1a] px-3 py-2 text-[11px] uppercase tracking-[0.14em] text-white/80 transition-colors hover:bg-white hover:text-[#1a1a1a]"
+          className="pointer-events-auto border border-white/70 bg-black/70 px-3 py-2 text-[11px] uppercase tracking-[0.14em] text-white transition-colors duration-300 hover:bg-white hover:text-[#1a1a1a]"
         >
           Яндекс
         </a>
@@ -24,7 +24,7 @@ export function SiteMap({ className }: { className?: string }) {
           href={DGIS_MAPS_HREF}
           target="_blank"
           rel="noreferrer"
-          className="pointer-events-auto bg-[#1a1a1a] px-3 py-2 text-[11px] uppercase tracking-[0.14em] text-white/80 transition-colors hover:bg-white hover:text-[#1a1a1a]"
+          className="pointer-events-auto border border-white/70 bg-black/70 px-3 py-2 text-[11px] uppercase tracking-[0.14em] text-white transition-colors duration-300 hover:bg-white hover:text-[#1a1a1a]"
         >
           2ГИС
         </a>

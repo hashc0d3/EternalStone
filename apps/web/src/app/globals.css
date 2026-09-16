@@ -22,3 +22,25 @@ select,
 [contenteditable='true'] {
   caret-color: auto;
 }
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex min-h-12 items-center justify-center bg-white px-8 text-sm font-medium uppercase tracking-[0.16em] text-[#1a1a1a] transition-colors duration-300 hover:bg-white/85;
+  }
+
+  .btn-ghost {
+    @apply inline-flex min-h-12 items-center justify-center border border-white/75 bg-black/50 px-8 text-sm uppercase tracking-[0.16em] text-white transition-colors duration-300 hover:border-white hover:bg-white hover:text-[#1a1a1a];
+  }
+
+  .btn-bar {
+    @apply flex min-h-[72px] w-full items-center justify-center gap-3 border-t border-white/10 bg-[#111] text-sm font-medium uppercase tracking-[0.22em] text-white transition-colors duration-300 hover:bg-white hover:text-[#1a1a1a];
+  }
+
+  .btn-icon {
+    @apply grid h-12 w-12 place-items-center bg-black/75 p-0 text-white ring-1 ring-white/70 transition-all duration-300 hover:bg-white hover:text-[#1a1a1a] hover:ring-white sm:h-14 sm:w-14;
+  }
+
+  .mark-sq {
+    @apply h-2 w-2 shrink-0 bg-current;
+  }
+}

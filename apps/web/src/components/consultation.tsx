@@ -21,7 +21,7 @@ export function Consultation() {
         </h2>
         <button
           type="button"
-          className="mt-10 inline-flex min-h-12 min-w-[220px] items-center justify-center bg-white px-8 text-sm font-medium uppercase tracking-[0.16em] text-[#1a1a1a] transition-colors duration-300 hover:bg-white/80"
+          className="btn-primary mt-10 min-w-[220px]"
           onClick={() => setOpen(true)}
         >
           Записаться

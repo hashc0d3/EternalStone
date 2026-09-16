@@ -77,7 +77,7 @@ export function LeadModal({
         <button
           type="button"
           aria-label="Закрыть"
-          className="absolute right-3 top-3 z-20 grid h-10 w-10 place-items-center rounded-full bg-black/35 p-0 text-white ring-1 ring-white/50 transition-all duration-300 ease-out hover:scale-110 hover:rotate-90 hover:bg-white hover:text-[#1a1a1a] hover:ring-white hover:shadow-md"
+          className="btn-icon absolute right-3 top-3 z-20 h-10 w-10 sm:h-10 sm:w-10"
           onClick={onClose}
         >
           <svg
@@ -93,7 +93,7 @@ export function LeadModal({
           </svg>
         </button>
         <div className="relative flex h-36 items-center justify-center">
-          <Image src="/images/slider/1.png" alt="" fill className="object-cover" />
+          <Image src="/images/slider/marble.png" alt="" fill quality={90} className="object-cover" />
           <div className="absolute inset-0 bg-black/35" />
           <Image
             src="/images/brand/logo.png"

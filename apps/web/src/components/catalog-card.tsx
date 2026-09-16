@@ -45,13 +45,8 @@ export function CatalogCard({
         ) : null}
       </div>
 
-      <span
-        aria-hidden="true"
-        className="pointer-events-none absolute bottom-6 left-6 z-10 h-2.5 w-2.5 -translate-x-1/2 translate-y-1/2 rounded-full bg-white/25 transition-transform duration-500 ease-out [@media(hover:hover)]:group-hover:scale-[28] motion-reduce:transition-none"
-      />
-      <div className="absolute bottom-5 left-5 z-20 flex items-center gap-2.5">
-        <span className="h-2.5 w-2.5 shrink-0 rounded-full bg-white" />
-        <span className="text-sm text-white opacity-0 transition-opacity duration-300 [@media(hover:hover)]:group-hover:opacity-100 motion-reduce:transition-none">
+      <div className="absolute bottom-5 left-5 z-20">
+        <span className="inline-flex min-h-9 items-center border border-white/70 bg-black/55 px-3 text-[11px] uppercase tracking-[0.14em] text-white transition-colors duration-300 [@media(hover:hover)]:group-hover:bg-white [@media(hover:hover)]:group-hover:text-[#1a1a1a]">
           Подробнее
         </span>
       </div>

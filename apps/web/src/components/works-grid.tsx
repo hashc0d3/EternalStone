@@ -5,8 +5,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import type { WorkPhoto } from '@/lib/works';
 
-const ARROW_CLASS =
-  'group grid h-12 w-12 place-items-center rounded-full bg-black/40 p-0 text-white ring-1 ring-white/25 backdrop-blur-[2px] transition-all duration-300 ease-out hover:scale-110 hover:bg-white hover:text-[#1a1a1a] hover:ring-white hover:shadow-md sm:h-14 sm:w-14';
+const ARROW_CLASS = 'btn-icon group';
 
 export function WorksGallery({
   initialPhotos,
@@ -43,14 +42,11 @@ export function WorksGallery({
       {hasMore ? (
         <button
           type="button"
-          className="group flex min-h-[72px] w-full items-center justify-center gap-3 border-t border-white/10 bg-[#111] text-sm font-medium uppercase tracking-[0.22em] text-white transition-colors duration-300 ease-out hover:bg-white hover:text-[#1a1a1a] disabled:opacity-60"
+          className="btn-bar group disabled:opacity-60"
           disabled={loading}
           onClick={loadMore}
         >
-          <span
-            className="h-2 w-2 bg-white transition-colors duration-300 group-hover:bg-[#1a1a1a]"
-            aria-hidden="true"
-          />
+          <span className="mark-sq" aria-hidden="true" />
           {loading ? 'Загрузка…' : 'Показать больше'}
         </button>
       ) : null}
@@ -151,7 +147,7 @@ function WorkLightbox({
       <button
         type="button"
         aria-label="Закрыть"
-        className="absolute right-4 top-4 z-20 grid h-10 w-10 place-items-center rounded-full bg-black/35 p-0 text-white ring-1 ring-white/50 transition-all duration-300 ease-out hover:scale-110 hover:rotate-90 hover:bg-white hover:text-[#1a1a1a] hover:ring-white hover:shadow-md"
+        className="btn-icon absolute right-4 top-4 z-20 h-10 w-10 sm:h-10 sm:w-10"
         onClick={onClose}
       >
         <svg viewBox="0 0 24 24" className="block h-[18px] w-[18px]" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">

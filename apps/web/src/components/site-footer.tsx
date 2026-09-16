@@ -26,7 +26,10 @@ export function SiteFooter() {
         </Link>
 
         <div className="order-2 text-sm lg:order-3">
-          <a href={PHONE_HREF} className="block text-xl tracking-wide text-white hover:text-white/80">
+          <a
+            href={PHONE_HREF}
+            className="inline-flex min-h-10 items-center border border-white/75 px-4 text-[15px] tracking-wide text-white transition-colors duration-300 hover:bg-white hover:text-[#1a1a1a]"
+          >
             {PHONE_LABEL}
           </a>
           <a
