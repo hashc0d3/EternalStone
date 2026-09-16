@@ -5,8 +5,8 @@ import { useState } from 'react';
 import { LeadModal } from '@/components/lead-modal';
 
 const PARTNERS = [
-  { src: '/images/partners/1.png', alt: 'Сбербанк' },
   { src: '/images/partners/2.png', alt: 'Шато' },
+  { src: '/images/partners/1.png', alt: 'Сбербанк' },
   { src: '/images/partners/3.png', alt: 'ОмГМУ' },
 ] as const;
 
