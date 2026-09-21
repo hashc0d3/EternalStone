@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { CatalogCard } from '@/components/catalog-card';
-import { LeadModal } from '@/components/lead-modal';
+import { LeadModal } from '@/components/lead-modal-lazy';
 
 const SERVICES = [
   { title: 'Установка памятника и облицовка могил', image: '/images/services/install.png' },

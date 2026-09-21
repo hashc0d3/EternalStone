@@ -6,6 +6,9 @@ import { ServicesSection } from '@/components/services-section';
 import { SiteMap } from '@/components/site-map';
 import { SiteShell } from '@/components/site-shell';
 import { WorksPreview } from '@/components/works-preview';
+import { localBusinessJsonLd } from '@/lib/seo';
+
+export const revalidate = 60;
 
 export default function HomePage() {
   return (
@@ -13,6 +16,10 @@ export default function HomePage() {
       hero={<HomeSlider />}
       afterHero={
         <>
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessJsonLd()) }}
+          />
           <HomeCatalog />
           <ServicesSection />
           <WorksPreview />

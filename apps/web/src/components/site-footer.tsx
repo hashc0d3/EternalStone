@@ -8,6 +8,7 @@ const FOOTER_LINKS = [
   { href: '/works', label: 'Работы' },
   { href: '/about', label: 'О компании' },
   { href: '/contacts', label: 'Контакты' },
+  { href: '/sitemap', label: 'Карта сайта' },
 ] as const;
 
 export function SiteFooter() {

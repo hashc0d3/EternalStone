@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { LeadModal } from '@/components/lead-modal';
+import { LeadModal } from '@/components/lead-modal-lazy';
 
 const SLIDES = [
   { src: '/images/slider/marble.png', alt: 'Мрамор' },
@@ -12,24 +12,24 @@ const SLIDES = [
 ] as const;
 
 const QUICK_LINKS = [
-  { href: '/catalog', label: 'Памятники' },
-  { href: '/catalog?material=гранит', label: 'Гранит' },
-  { href: '/catalog?material=мрамор', label: 'Мрамор' },
+  { href: '/catalog?cat=pamyatniki', label: 'Памятники' },
+  { href: '/catalog?cat=pamyatniki&material=granite', label: 'Гранит' },
+  { href: '/catalog?cat=pamyatniki&material=marble', label: 'Мрамор' },
   { href: '/services', label: 'Работы с камнем' },
 ] as const;
 
 const COMPLEX_PARTS = [
-  { href: '/catalog?type=комплексы&part=stela', label: 'Стела' },
-  { href: '/catalog?type=комплексы&part=fence', label: 'Ограда' },
-  { href: '/catalog?type=комплексы&part=bed', label: 'Цветник' },
-  { href: '/catalog?type=комплексы&part=bench', label: 'Скамейка' },
+  { href: '/catalog?cat=pamyatniki', label: 'Стела' },
+  { href: '/catalog?cat=kompleksy', label: 'Ограда' },
+  { href: '/catalog?cat=kompleksy', label: 'Цветник' },
+  { href: '/catalog?cat=izdeliya', label: 'Скамейка' },
 ] as const;
 
 const GRANITE_LINKS = [
-  { href: '/catalog?material=дымовский', label: 'Дымовский' },
-  { href: '/catalog?material=южно-султаевский', label: 'Южно-Султаевский' },
-  { href: '/catalog?material=мансуровский', label: 'Мансуровский' },
-  { href: '/catalog?material=гранит', label: 'Другие граниты' },
+  { href: '/catalog?cat=pamyatniki&sub=dymovskiy', label: 'Дымовский' },
+  { href: '/catalog?cat=pamyatniki&material=granite', label: 'Южно-Султаевский' },
+  { href: '/catalog?cat=pamyatniki&material=granite', label: 'Мансуровский' },
+  { href: '/catalog?cat=pamyatniki&material=granite', label: 'Другие граниты' },
 ] as const;
 
 export function HomeSlider() {
@@ -80,7 +80,7 @@ export function HomeSlider() {
                 alt={slide.alt}
                 fill
                 priority={slideIndex === 0}
-                quality={95}
+                quality={slideIndex === 0 ? 80 : 70}
                 sizes="100vw"
                 className="object-cover"
                 draggable={false}
@@ -90,9 +90,13 @@ export function HomeSlider() {
                 aria-hidden="true"
               />
               <div className="absolute inset-0 bg-black/25 lg:bg-transparent" aria-hidden="true" />
-              {slideIndex === 0 ? <FirstSlideContent onCallback={() => setCallbackOpen(true)} /> : null}
-              {slideIndex === 1 ? <SecondSlideContent onCallback={() => setCallbackOpen(true)} /> : null}
-              {slideIndex === 2 ? <ThirdSlideContent onCallback={() => setCallbackOpen(true)} /> : null}
+              {slideIndex === index ? (
+                <>
+                  {slideIndex === 0 ? <FirstSlideContent onCallback={() => setCallbackOpen(true)} /> : null}
+                  {slideIndex === 1 ? <SecondSlideContent onCallback={() => setCallbackOpen(true)} /> : null}
+                  {slideIndex === 2 ? <ThirdSlideContent onCallback={() => setCallbackOpen(true)} /> : null}
+                </>
+              ) : null}
             </div>
           ))}
         </div>
@@ -163,12 +167,10 @@ export function HomeSlider() {
 
 function SlideShell({
   children,
-  aside,
-  mobileAside,
+  links,
 }: {
   children: React.ReactNode;
-  aside: React.ReactNode;
-  mobileAside?: React.ReactNode;
+  links: readonly { href: string; label: string }[];
 }) {
   return (
     <div
@@ -180,16 +182,18 @@ function SlideShell({
     >
       <div className="mx-auto flex w-full max-w-5xl items-center justify-center gap-12 xl:max-w-6xl xl:gap-20">
         <div className="max-w-3xl text-center lg:text-left">{children}</div>
-        <div className="hidden shrink-0 flex-col items-center lg:flex">{aside}</div>
+        <div className="hidden shrink-0 lg:block">
+          <QuickLinksFrame items={links} />
+        </div>
       </div>
-      {mobileAside ? (
-        <div className="mx-auto mt-8 flex w-full max-w-md flex-col items-center lg:hidden">{mobileAside}</div>
-      ) : null}
+      <div className="mx-auto mt-8 w-full max-w-xs lg:hidden">
+        <QuickLinksList items={links} />
+      </div>
     </div>
   );
 }
 
-function SlideActions({ onCallback }: { onCallback: () => void }) {
+function SlideActions({ onCallback, catalogHref }: { onCallback: () => void; catalogHref: string }) {
   return (
     <div className="mt-7 flex w-full flex-col items-center gap-3 sm:flex-row sm:flex-wrap sm:justify-center lg:justify-start lg:items-start">
       <button
@@ -200,7 +204,7 @@ function SlideActions({ onCallback }: { onCallback: () => void }) {
         Обратный звонок
       </button>
       <Link
-        href="/catalog"
+        href={catalogHref}
         className="btn-ghost w-full max-w-xs px-5 tracking-[0.02em] sm:w-auto"
       >
         К каталогу
@@ -225,91 +229,58 @@ function SlideLead({ eyebrow, title }: { eyebrow: React.ReactNode; title: string
 
 function FirstSlideContent({ onCallback }: { onCallback: () => void }) {
   return (
-    <SlideShell
-      aside={<QuickLinksNav items={QUICK_LINKS} className="h-80 w-80" />}
-      mobileAside={<MobileQuickLinks items={QUICK_LINKS} />}
-    >
+    <SlideShell links={QUICK_LINKS}>
       <SlideLead eyebrow="Омск и вся Россия" title="Памятники и изделия из камня" />
-      <SlideActions onCallback={onCallback} />
+      <SlideActions onCallback={onCallback} catalogHref="/catalog?cat=pamyatniki" />
     </SlideShell>
   );
 }
 
 function SecondSlideContent({ onCallback }: { onCallback: () => void }) {
   return (
-    <SlideShell
-      aside={<QuickLinksNav items={COMPLEX_PARTS} className="h-80 w-80" />}
-      mobileAside={<MobileQuickLinks items={COMPLEX_PARTS} />}
-    >
+    <SlideShell links={COMPLEX_PARTS}>
       <p className="text-xs uppercase tracking-[0.22em] text-white/85">Скидка ветеранам и героям России</p>
       <h2 className="mx-auto mt-5 max-w-[16ch] text-[26px] font-medium uppercase leading-[1.12] tracking-wide text-white sm:text-5xl lg:mx-0 lg:text-[56px]">
         Комплексные могилы
       </h2>
-      <SlideActions onCallback={onCallback} />
+      <SlideActions onCallback={onCallback} catalogHref="/catalog?cat=kompleksy" />
     </SlideShell>
   );
 }
 
 function ThirdSlideContent({ onCallback }: { onCallback: () => void }) {
   return (
-    <SlideShell
-      aside={<QuickLinksNav items={GRANITE_LINKS} className="h-80 w-80" />}
-      mobileAside={<MobileQuickLinks items={GRANITE_LINKS} />}
-    >
+    <SlideShell links={GRANITE_LINKS}>
       <SlideLead eyebrow="Омск и вся Россия" title="Лестницы из гранита" />
-      <SlideActions onCallback={onCallback} />
+      <SlideActions onCallback={onCallback} catalogHref="/catalog?cat=oblitsovka" />
     </SlideShell>
   );
 }
 
-function MobileQuickLinks({
-  items,
-}: {
-  items: readonly { href: string; label: string }[];
-}) {
+function QuickLinksFrame({ items }: { items: readonly { href: string; label: string }[] }) {
   return (
-    <nav aria-label="Быстрый переход" className="flex w-full flex-col gap-2">
-      {items.map((item) => (
-        <Link
-          key={item.href}
-          href={item.href}
-          className="relative flex min-h-12 items-center justify-center border border-white/70 bg-black/60 px-10 text-center text-[15px] text-white transition-colors duration-300 hover:bg-white hover:text-[#1a1a1a]"
-        >
-          {item.label}
-          <svg className="absolute right-4 h-4 w-4" fill="none" viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M9 6l6 6-6 6" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.6" />
-          </svg>
-        </Link>
-      ))}
+    <nav aria-label="Быстрый переход" className="relative flex h-80 w-80 items-center justify-center">
+      <SpinningFrame />
+      <div className="relative z-[1] w-44">
+        <QuickLinksList items={items} />
+      </div>
     </nav>
   );
 }
 
-function QuickLinksNav({
-  items,
-  className,
-}: {
-  items: readonly { href: string; label: string }[];
-  className?: string;
-}) {
+function QuickLinksList({ items }: { items: readonly { href: string; label: string }[] }) {
   return (
-    <nav
-      aria-label="Быстрый переход"
-      className={`relative flex flex-col items-center justify-center ${className ?? ''}`}
-    >
-      <SpinningFrame />
-      <div className="relative z-[1] flex w-[11.5rem] flex-col items-stretch gap-2">
-        {items.map((item) => (
-          <Link
-            key={item.href}
-            href={item.href}
-            className="inline-flex min-h-10 items-center justify-center border border-white/75 bg-black/55 px-3 text-center text-[12px] uppercase leading-none tracking-[0.12em] text-white transition-colors duration-300 hover:bg-white hover:text-[#1a1a1a] lg:text-[13px]"
-          >
-            {item.label}
-          </Link>
-        ))}
-      </div>
-    </nav>
+    <div className="flex flex-col">
+      {items.map((item) => (
+        <Link
+          key={item.label}
+          href={item.href}
+          className="flex min-h-12 items-center justify-center border-b border-white/25 px-2 text-center text-[12px] uppercase tracking-[0.16em] text-white last:border-b-0 transition-colors duration-300 hover:bg-white hover:text-[#1a1a1a] lg:min-h-11 lg:text-[13px]"
+        >
+          {item.label}
+        </Link>
+      ))}
+    </div>
   );
 }
 

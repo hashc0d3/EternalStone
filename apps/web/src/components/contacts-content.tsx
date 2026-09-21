@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { LeadModal } from '@/components/lead-modal';
+import { LeadModal } from '@/components/lead-modal-lazy';
 import { SiteMap } from '@/components/site-map';
 import { ADDRESS_LABEL, PHONE_HREF, PHONE_LABEL, YANDEX_MAPS_HREF } from '@/lib/location';
 

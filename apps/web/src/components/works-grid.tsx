@@ -19,18 +19,24 @@ export function WorksGallery({
   const [photos, setPhotos] = useState(initialPhotos);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
+  const [failed, setFailed] = useState(false);
   const hasMore = photos.length < total;
 
   async function loadMore() {
     if (loading || !hasMore) return;
     setLoading(true);
+    setFailed(false);
 
     try {
-      const response = await fetch(`/api/works?page=${page + 1}&limit=${pageSize}`);
-      if (!response.ok) return;
+      const response = await fetch(`/api/works?page=${page + 1}&limit=${pageSize}`, {
+        signal: AbortSignal.timeout(8_000),
+      });
+      if (!response.ok) throw new Error('load failed');
       const next = (await response.json()) as { items: WorkPhoto[] };
       setPhotos((current) => [...current, ...next.items]);
       setPage((current) => current + 1);
+    } catch {
+      setFailed(true);
     } finally {
       setLoading(false);
     }
@@ -39,6 +45,16 @@ export function WorksGallery({
   return (
     <>
       <WorksGrid photos={photos} />
+      {loading ? (
+        <div className="grid grid-cols-2 gap-px bg-black lg:grid-cols-3">
+          {Array.from({ length: 3 }, (_, index) => (
+            <div key={index} className="skeleton min-h-[220px] lg:min-h-[280px]" />
+          ))}
+        </div>
+      ) : null}
+      {failed ? (
+        <p className="px-4 py-4 text-center text-sm text-white/50">Не удалось загрузить. Попробуйте ещё раз.</p>
+      ) : null}
       {hasMore ? (
         <button
           type="button"
@@ -47,7 +63,7 @@ export function WorksGallery({
           onClick={loadMore}
         >
           <span className="mark-sq" aria-hidden="true" />
-          {loading ? 'Загрузка…' : 'Показать больше'}
+          {loading ? 'Загрузка…' : failed ? 'Повторить' : 'Показать больше'}
         </button>
       ) : null}
     </>
@@ -74,6 +90,7 @@ export function WorksGrid({ photos }: { photos: WorkPhoto[] }) {
               fill
               sizes="(max-width: 640px) 50vw, 33vw"
               className="object-cover brightness-[0.82] transition-[filter] duration-500 group-hover:brightness-110"
+          loading="lazy"
             />
           </button>
         ))}

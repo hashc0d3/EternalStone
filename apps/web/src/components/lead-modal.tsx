@@ -9,10 +9,12 @@ import { formatRuPhone, isValidRuMobile } from '@/lib/phone';
 export function LeadModal({
   title,
   source,
+  productName,
   onClose,
 }: {
   title: string;
-  source: 'partner' | 'wholesale' | 'retail' | 'callback' | 'consultation' | 'contacts' | 'services';
+  source: 'partner' | 'wholesale' | 'retail' | 'callback' | 'consultation' | 'contacts' | 'services' | 'order';
+  productName?: string;
   onClose: () => void;
 }) {
   const [name, setName] = useState('');
@@ -49,7 +51,7 @@ export function LeadModal({
       const response = await fetch('/api/telegram', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name: name.trim(), phone, source }),
+        body: JSON.stringify({ name: name.trim(), phone, source, product: productName }),
       });
 
       if (!response.ok) {
@@ -64,7 +66,7 @@ export function LeadModal({
 
   const dialog = (
     <div
-      className="fixed inset-0 z-[100] flex items-center justify-center bg-black/45 p-4 backdrop-blur-md"
+      className="fixed inset-0 z-[110] flex items-center justify-center bg-black/45 p-4 backdrop-blur-md"
       onClick={onClose}
     >
       <div
@@ -93,7 +95,7 @@ export function LeadModal({
           </svg>
         </button>
         <div className="relative flex h-36 items-center justify-center">
-          <Image src="/images/slider/marble.png" alt="" fill quality={90} className="object-cover" />
+          <Image src="/images/slider/marble.png" alt="" fill quality={70} className="object-cover" />
           <div className="absolute inset-0 bg-black/35" />
           <Image
             src="/images/brand/logo.png"

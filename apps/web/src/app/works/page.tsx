@@ -1,14 +1,25 @@
+import type { Metadata } from 'next';
 import { WorksGallery } from '@/components/works-grid';
 import { SiteShell } from '@/components/site-shell';
 import { getWorkPage } from '@/lib/works';
+import { pageMetadata } from '@/lib/seo';
 
 const PAGE_SIZE = 9;
+
+export const revalidate = 60;
+
+export const metadata: Metadata = pageMetadata({
+  title: 'Наши работы',
+  description: 'Фотографии установленных памятников, комплексов и облицовки компании «Вечный камень».',
+  path: '/works',
+});
 
 export default async function WorksPage() {
   const { items, total } = await getWorkPage(1, PAGE_SIZE);
 
   return (
     <SiteShell
+      crumbs={[{ href: '/', label: 'Главная' }, { href: '/works', label: 'Работы' }]}
       afterHero={
         <section className="flex flex-col bg-[#1a1a1a]" aria-labelledby="works-title">
           <h1

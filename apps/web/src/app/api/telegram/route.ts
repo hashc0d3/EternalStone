@@ -16,7 +16,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'Telegram is not configured' }, { status: 503 });
   }
 
-  let body: { name?: string; phone?: string; source?: string };
+  let body: { name?: string; phone?: string; source?: string; product?: string };
   try {
     body = (await request.json()) as { name?: string; phone?: string; source?: string };
   } catch {
@@ -42,26 +42,37 @@ export async function POST(request: Request) {
     contacts: 'Заявка: обратный звонок (контакты)',
     consultation: 'Заявка: бесплатная консультация',
     services: 'Заявка: услуга',
+    order: 'Заявка: заказ из каталога',
   };
   const source = body.source && headings[body.source] ? body.source : 'callback';
   const heading = headings[source];
+  const product = body.product?.trim();
   const text = [
     `<b>${heading}</b>`,
     '',
+    product ? `<b>Товар:</b> ${escapeHtml(product)}` : '',
     `<b>Имя:</b> ${escapeHtml(name)}`,
     `<b>Телефон:</b> ${escapeHtml(phone)}`,
     `<b>Номер:</b> +${normalizeRuPhone(phone)}`,
-  ].join('\n');
+  ]
+    .filter(Boolean)
+    .join('\n');
 
-  const telegramResponse = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      chat_id: chatId,
-      text,
-      parse_mode: 'HTML',
-    }),
-  });
+  let telegramResponse: Response;
+  try {
+    telegramResponse = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        chat_id: chatId,
+        text,
+        parse_mode: 'HTML',
+      }),
+      signal: AbortSignal.timeout(8_000),
+    });
+  } catch {
+    return NextResponse.json({ error: 'Не удалось отправить заявку' }, { status: 502 });
+  }
 
   if (!telegramResponse.ok) {
     return NextResponse.json({ error: 'Не удалось отправить заявку' }, { status: 502 });

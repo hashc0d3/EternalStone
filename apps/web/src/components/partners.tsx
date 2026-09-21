@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { useState } from 'react';
-import { LeadModal } from '@/components/lead-modal';
+import { LeadModal } from '@/components/lead-modal-lazy';
 
 const PARTNERS = [
   { src: '/images/partners/2.png', alt: 'Шато' },

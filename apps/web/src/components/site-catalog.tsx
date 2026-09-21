@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { CatalogCard } from '@/components/catalog-card';
 import { CatalogSwitch } from '@/components/catalog-switch';
-import { LeadModal } from '@/components/lead-modal';
+import { LeadModal } from '@/components/lead-modal-lazy';
 import { RequestCta } from '@/components/request-cta';
 import { OPT_CARDS, RETAIL_CARDS, type CatalogView } from '@/lib/catalog';
 
@@ -40,7 +40,7 @@ export function SiteCatalog({
       ) : (
         <div className="grid min-h-0 flex-1 gap-px bg-black lg:grid-rows-2">
           <div className="grid min-h-[220px] gap-px lg:min-h-0 lg:grid-cols-[1.35fr_1fr]">
-            <CatalogCard {...first} featured />
+            <CatalogCard {...first} featured priority />
             <CatalogCard {...second} featured />
           </div>
           <div className="grid min-h-[200px] gap-px lg:min-h-0 lg:grid-cols-3">

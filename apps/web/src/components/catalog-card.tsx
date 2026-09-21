@@ -8,6 +8,7 @@ export function CatalogCard({
   title,
   subtitle,
   featured = false,
+  priority = false,
 }: {
   href?: string;
   onClick?: () => void;
@@ -15,6 +16,7 @@ export function CatalogCard({
   title: string;
   subtitle?: string;
   featured?: boolean;
+  priority?: boolean;
 }) {
   const content = (
     <>
@@ -25,7 +27,8 @@ export function CatalogCard({
             alt=""
             fill
             sizes="(max-width: 1024px) 100vw, 50vw"
-            className="object-cover brightness-[0.82] transition-[filter] duration-500 group-hover:brightness-110"
+            className="bg-[#111] object-cover brightness-[0.82] transition-[filter] duration-500 group-hover:brightness-110"
+            priority={priority}
           />
           <div className="absolute inset-0 bg-gradient-to-r from-black/55 via-black/25 to-black/10 transition-opacity duration-500 group-hover:opacity-40" />
         </>
