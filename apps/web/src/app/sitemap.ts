@@ -44,12 +44,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'weekly',
       priority: 0.7,
     },
-    {
-      url: sitemapLoc(catalogHref('retail', 'pamyatniki', null, 'marble')),
-      lastModified: now,
-      changeFrequency: 'weekly',
-      priority: 0.7,
-    },
   );
 
   for (const category of OPT_CATEGORIES) {

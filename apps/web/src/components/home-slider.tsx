@@ -6,7 +6,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { LeadModal } from '@/components/lead-modal-lazy';
 
 const SLIDES = [
-  { src: '/images/slider/marble.png', alt: 'Мрамор' },
+  { src: '/images/slider/marble-gold.png', alt: 'Чёрный мрамор с золотыми прожилками' },
   { src: '/images/slider/complex.png', alt: 'Мемориальный комплекс' },
   { src: '/images/slider/stairs.png', alt: 'Гранитная лестница' },
 ] as const;
@@ -14,7 +14,7 @@ const SLIDES = [
 const QUICK_LINKS = [
   { href: '/catalog?cat=pamyatniki', label: 'Памятники' },
   { href: '/catalog?cat=pamyatniki&material=granite', label: 'Гранит' },
-  { href: '/catalog?cat=pamyatniki&material=marble', label: 'Мрамор' },
+  { href: '/catalog?cat=pamyatniki&sub=karelia', label: 'Карелия' },
   { href: '/services', label: 'Работы с камнем' },
 ] as const;
 
@@ -86,10 +86,21 @@ export function HomeSlider() {
                 draggable={false}
               />
               <div
-                className="absolute inset-0 bg-[linear-gradient(90deg,rgba(8,8,8,0.88)_0%,rgba(8,8,8,0.72)_42%,rgba(8,8,8,0.38)_72%,rgba(8,8,8,0.22)_100%)]"
+                className={
+                  slideIndex === 0
+                    ? 'absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0.28)_0%,rgba(0,0,0,0.18)_42%,rgba(0,0,0,0.38)_100%)]'
+                    : 'absolute inset-0 bg-[linear-gradient(90deg,rgba(8,8,8,0.88)_0%,rgba(8,8,8,0.72)_42%,rgba(8,8,8,0.38)_72%,rgba(8,8,8,0.22)_100%)]'
+                }
                 aria-hidden="true"
               />
-              <div className="absolute inset-0 bg-black/25 lg:bg-transparent" aria-hidden="true" />
+              {slideIndex === 0 ? (
+                <div
+                  className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.22)_0%,transparent_22%,transparent_78%,rgba(0,0,0,0.28)_100%)]"
+                  aria-hidden="true"
+                />
+              ) : (
+                <div className="absolute inset-0 bg-black/25 lg:bg-transparent" aria-hidden="true" />
+              )}
               {slideIndex === index ? (
                 <>
                   {slideIndex === 0 ? <FirstSlideContent onCallback={() => setCallbackOpen(true)} /> : null}
@@ -213,14 +224,22 @@ function SlideActions({ onCallback, catalogHref }: { onCallback: () => void; cat
   );
 }
 
-function SlideLead({ eyebrow, title }: { eyebrow: React.ReactNode; title: string }) {
+function SlideLead({
+  eyebrow,
+  title,
+  lineClassName = 'bg-white/70',
+}: {
+  eyebrow: React.ReactNode;
+  title: string;
+  lineClassName?: string;
+}) {
   return (
     <>
       <p className="text-[11px] uppercase leading-relaxed tracking-[0.22em] text-white/85 sm:text-xs lg:tracking-[0.28em]">
         {eyebrow}
       </p>
-      <span className="mx-auto mt-5 block h-px w-12 bg-white/70 lg:mx-0 lg:w-16" aria-hidden="true" />
-      <h2 className="mx-auto mt-6 max-w-[16ch] text-[28px] font-medium uppercase leading-[1.08] tracking-[0.06em] text-white sm:text-5xl lg:mx-0 lg:max-w-[14ch] lg:text-[58px] lg:tracking-[0.08em] xl:text-[68px]">
+      <span className={`mx-auto mt-5 block h-px w-12 lg:mx-0 lg:w-16 ${lineClassName}`} aria-hidden="true" />
+      <h2 className="mx-auto mt-6 max-w-[16ch] text-[28px] font-medium uppercase leading-[1.08] tracking-[0.06em] text-white [text-shadow:0_2px_24px_rgba(0,0,0,0.55)] sm:text-5xl lg:mx-0 lg:max-w-[14ch] lg:text-[58px] lg:tracking-[0.08em] xl:text-[68px]">
         {title}
       </h2>
     </>
@@ -230,7 +249,11 @@ function SlideLead({ eyebrow, title }: { eyebrow: React.ReactNode; title: string
 function FirstSlideContent({ onCallback }: { onCallback: () => void }) {
   return (
     <SlideShell links={QUICK_LINKS}>
-      <SlideLead eyebrow="Омск и вся Россия" title="Памятники и изделия из камня" />
+      <SlideLead
+        eyebrow="Омск и вся Россия"
+        title="Памятники и изделия из камня"
+        lineClassName="bg-[#c4a574]/80"
+      />
       <SlideActions onCallback={onCallback} catalogHref="/catalog?cat=pamyatniki" />
     </SlideShell>
   );

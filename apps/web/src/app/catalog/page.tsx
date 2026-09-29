@@ -32,7 +32,7 @@ export async function generateMetadata({ searchParams }: { searchParams: Search 
   const description =
     view === 'opt'
       ? `Оптовый каталог камня: ${title}. Памятники, изделия и плитка от производителя в Омске.`
-      : `${title} — гранит и мрамор, изготовление и установка в Омске и по России.`;
+      : `${title} — гранит, изготовление и установка в Омске и по России.`;
 
   return pageMetadata({
     title,

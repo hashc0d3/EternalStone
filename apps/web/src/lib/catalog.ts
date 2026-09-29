@@ -31,8 +31,6 @@ export const RETAIL_CATEGORIES: CatalogCategory[] = [
     title: 'Памятники',
     children: [
       { slug: 'karelia', title: 'Черный Гранит Карелия' },
-      { slug: 'polevskoy', title: 'Мрамор Полевской' },
-      { slug: 'ufaley', title: 'Мрамор Уфалей' },
       { slug: 'dymovskiy', title: 'Гранит Дымовский' },
       { slug: 'family', title: 'Семейные' },
     ],
@@ -54,13 +52,13 @@ export const RETAIL_CARDS = [
     href: '/catalog?cat=pamyatniki',
     image: '/images/catalog/1.png',
     title: 'Памятники',
-    subtitle: 'Гранит и мрамор',
+    subtitle: 'Гранит',
   },
   {
     href: '/catalog?cat=izdeliya',
     image: '/images/catalog/2.png',
     title: 'Изделия',
-    subtitle: 'Вазы, лампады, скамейки',
+    subtitle: 'Вазы, скамейки',
   },
   {
     href: '/catalog?cat=plitka',
@@ -91,7 +89,7 @@ export const OPT_CARDS = [
     href: '/catalog?view=opt&cat=izdeliya',
     image: '/images/catalog/2.png',
     title: 'Изделия',
-    subtitle: 'Вазы, лампады, скамейки',
+    subtitle: 'Вазы, скамейки',
   },
   {
     href: '/catalog?view=opt&cat=plitka',
@@ -139,58 +137,6 @@ export const CATALOG_PRODUCTS: CatalogProduct[] = [
     excerpt: 'Компактная модель для ограниченного участка.',
     description:
       'Небольшая стела из чёрного гранита Карелии. Удобна для узких мест. Возможна гравировка портрета в овале и золочение букв.',
-  },
-  {
-    id: 'r-p-1',
-    name: 'Стела «Полевской» светлая',
-    view: 'retail',
-    category: 'pamyatniki',
-    subcategory: 'polevskoy',
-    image: '/images/works/orig-3.jpg',
-    price: 48000,
-    size: '90×45×8 см',
-    excerpt: 'Светлый мрамор с мягким рисунком.',
-    description:
-      'Памятник из полевского мрамора. Светлый тон хорошо читается в пасмурную погоду. Рекомендуем защитное покрытие и регулярный уход зимой.',
-  },
-  {
-    id: 'r-p-2',
-    name: 'Памятник «Урал» с цветником',
-    view: 'retail',
-    category: 'pamyatniki',
-    subcategory: 'polevskoy',
-    image: '/images/catalog/5.png',
-    price: 64000,
-    size: '100×50×8 см, цветник 100×50',
-    excerpt: 'Мраморная стела и низкий цветник в комплекте.',
-    description:
-      'Комплект из полевского мрамора: вертикальная стела и цветник. Швы закрываются герметиком под цвет камня. Портрет — гравировка или керамика.',
-  },
-  {
-    id: 'r-u-1',
-    name: 'Стела «Уфалей» серая',
-    view: 'retail',
-    category: 'pamyatniki',
-    subcategory: 'ufaley',
-    image: '/images/works/orig-2.png',
-    price: 52000,
-    size: '100×50×8 см',
-    excerpt: 'Серый уфалейский мрамор, спокойный рисунок.',
-    description:
-      'Стела из мрамора Уфалей. Благородный серый тон, хорошо сочетается с гранитным цоколем. Можно дополнить вазой и надгробной плитой.',
-  },
-  {
-    id: 'r-u-2',
-    name: 'Памятник «Тишина» горизонтальный',
-    view: 'retail',
-    category: 'pamyatniki',
-    subcategory: 'ufaley',
-    image: '/images/works/orig-5.jpg',
-    price: 69000,
-    size: '70×120×8 см',
-    excerpt: 'Широкая стела для двух портретов.',
-    description:
-      'Горизонтальный памятник из уфалейского мрамора. Два овальных поля под портреты, место под фамильные даты. Основание из того же камня.',
   },
   {
     id: 'r-d-1',
@@ -255,18 +201,6 @@ export const CATALOG_PRODUCTS: CatalogProduct[] = [
     excerpt: 'Полированная ваза из чёрного гранита.',
     description:
       'Надгробная ваза из карельского гранита. Сквозное отверстие под воду, устойчивое дно. Крепится к плите или цветнику.',
-  },
-  {
-    id: 'r-i-2',
-    name: 'Лампада «Вечер»',
-    view: 'retail',
-    category: 'izdeliya',
-    image: '/images/services/1.png',
-    price: 6500,
-    size: '18×18×22 см',
-    excerpt: 'Закрытая лампада, стекло в комплекте.',
-    description:
-      'Гранитная лампада с защитным стеклом. Пламя не гаснет на ветру. Поставляется с запасным стаканом.',
   },
   {
     id: 'r-i-3',
@@ -425,18 +359,6 @@ export const CATALOG_PRODUCTS: CatalogProduct[] = [
       'Гранитовые вазы упаковкой по 12 штук. Единый размер. Возможен микс высот при заказе от трёх ящиков.',
   },
   {
-    id: 'o-i-2',
-    name: 'Лампады опт, 20 шт.',
-    view: 'opt',
-    category: 'izdeliya',
-    image: '/images/services/1.png',
-    price: 98000,
-    size: '18×18×22 см',
-    excerpt: 'Со стеклом, отгрузка паллетой.',
-    description:
-      'Оптовая партия лампад. Стекло в отдельной обрешётке. Скидка при повторном заказе в сезон.',
-  },
-  {
     id: 'o-t-1',
     name: 'Плитка опт 300×300',
     view: 'opt',
@@ -486,21 +408,19 @@ export function catalogHref(
   return query ? `/catalog?${query}` : '/catalog';
 }
 
-export type CatalogMaterial = 'granite' | 'marble';
+export type CatalogMaterial = 'granite';
 
 const MATERIAL_SUBS: Record<CatalogMaterial, string[]> = {
-  granite: ['karelia', 'dymovskiy'],
-  marble: ['polevskoy', 'ufaley'],
+  granite: ['karelia', 'dymovskiy', 'family'],
 };
 
 export function parseMaterial(value: string | null): CatalogMaterial | null {
-  if (value === 'granite' || value === 'marble') return value;
+  if (value === 'granite') return value;
   return null;
 }
 
 export function materialTitle(material?: CatalogMaterial | null) {
   if (material === 'granite') return 'Гранит';
-  if (material === 'marble') return 'Мрамор';
   return null;
 }
 

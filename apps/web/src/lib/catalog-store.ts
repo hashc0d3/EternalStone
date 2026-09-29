@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { CATALOG_PRODUCTS, type CatalogProduct } from '@/lib/catalog';
 
-const STORAGE_KEY = 'eternal-stone-catalog-v1';
+const STORAGE_KEY = 'eternal-stone-catalog-v2';
 const CHANGE_EVENT = 'catalog-changed';
 
 export function loadCatalogProducts(): CatalogProduct[] {

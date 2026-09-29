@@ -1,5 +1,5 @@
-export const PHONE_LABEL = '+7 (913) 644-14-77';
-export const PHONE_HREF = 'tel:+79136441477';
+export const PHONE_LABEL = '+7 (913) 140-10-14';
+export const PHONE_HREF = 'tel:+79131401014';
 export const ADDRESS_LABEL = 'Омск, 22 Декабря, 94';
 export const YANDEX_MAPS_HREF = 'https://yandex.ru/maps/?text=Омск, 22 Декабря, 94';
 export const DGIS_MAPS_HREF = 'https://2gis.ru/omsk/geo/282110631946547';
