@@ -6,9 +6,9 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { LeadModal } from '@/components/lead-modal-lazy';
 
 const SLIDES = [
-  { src: '/images/slider/marble-gold.png', alt: 'Чёрный мрамор с золотыми прожилками' },
-  { src: '/images/slider/complex.png', alt: 'Мемориальный комплекс' },
   { src: '/images/slider/stairs.png', alt: 'Гранитная лестница' },
+  { src: '/images/slider/complex.png', alt: 'Мемориальный комплекс' },
+  { src: '/images/slider/marble-gold.png', alt: 'Чёрный мрамор с золотыми прожилками' },
 ] as const;
 
 const QUICK_LINKS = [
@@ -87,13 +87,13 @@ export function HomeSlider() {
               />
               <div
                 className={
-                  slideIndex === 0
+                  slide.src === '/images/slider/marble-gold.png'
                     ? 'absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0.28)_0%,rgba(0,0,0,0.18)_42%,rgba(0,0,0,0.38)_100%)]'
                     : 'absolute inset-0 bg-[linear-gradient(90deg,rgba(8,8,8,0.88)_0%,rgba(8,8,8,0.72)_42%,rgba(8,8,8,0.38)_72%,rgba(8,8,8,0.22)_100%)]'
                 }
                 aria-hidden="true"
               />
-              {slideIndex === 0 ? (
+              {slide.src === '/images/slider/marble-gold.png' ? (
                 <div
                   className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.22)_0%,transparent_22%,transparent_78%,rgba(0,0,0,0.28)_100%)]"
                   aria-hidden="true"
@@ -103,9 +103,9 @@ export function HomeSlider() {
               )}
               {slideIndex === index ? (
                 <>
-                  {slideIndex === 0 ? <FirstSlideContent onCallback={() => setCallbackOpen(true)} /> : null}
+                  {slideIndex === 0 ? <ThirdSlideContent onCallback={() => setCallbackOpen(true)} /> : null}
                   {slideIndex === 1 ? <SecondSlideContent onCallback={() => setCallbackOpen(true)} /> : null}
-                  {slideIndex === 2 ? <ThirdSlideContent onCallback={() => setCallbackOpen(true)} /> : null}
+                  {slideIndex === 2 ? <FirstSlideContent onCallback={() => setCallbackOpen(true)} /> : null}
                 </>
               ) : null}
             </div>
@@ -191,13 +191,8 @@ function SlideShell({
         if (target.closest('a, button')) event.stopPropagation();
       }}
     >
-      <div className="mx-auto flex w-full max-w-5xl items-center justify-center gap-12 xl:max-w-6xl xl:gap-20">
+      <div className="mx-auto flex w-full max-w-5xl flex-col items-center justify-center gap-10 lg:flex-row lg:items-center lg:justify-between xl:max-w-6xl">
         <div className="max-w-3xl text-center lg:text-left">{children}</div>
-        <div className="hidden shrink-0 lg:block">
-          <QuickLinksFrame items={links} />
-        </div>
-      </div>
-      <div className="mx-auto mt-8 w-full max-w-xs lg:hidden">
         <QuickLinksList items={links} />
       </div>
     </div>
@@ -264,7 +259,7 @@ function SecondSlideContent({ onCallback }: { onCallback: () => void }) {
     <SlideShell links={COMPLEX_PARTS}>
       <p className="text-xs uppercase tracking-[0.22em] text-white/85">Скидка ветеранам и героям России</p>
       <h2 className="mx-auto mt-5 max-w-[16ch] text-[26px] font-medium uppercase leading-[1.12] tracking-wide text-white sm:text-5xl lg:mx-0 lg:text-[56px]">
-        Комплексные могилы
+        Мемориальные комплексы
       </h2>
       <SlideActions onCallback={onCallback} catalogHref="/catalog?cat=kompleksy" />
     </SlideShell>
@@ -280,46 +275,15 @@ function ThirdSlideContent({ onCallback }: { onCallback: () => void }) {
   );
 }
 
-function QuickLinksFrame({ items }: { items: readonly { href: string; label: string }[] }) {
+function QuickLinksList({ items }: { items: readonly { href: string; label: string }[] }) {
   return (
-    <nav aria-label="Быстрый переход" className="relative flex h-80 w-80 items-center justify-center">
-      <SpinningFrame />
-      <div className="relative z-[1] w-44">
-        <QuickLinksList items={items} />
-      </div>
+    <nav aria-label="Быстрый переход" className="flex w-full max-w-xs flex-col gap-2 lg:w-56">
+      {items.map((item) => (
+        <Link key={item.label} href={item.href} className="btn-ghost w-full px-3 text-[12px] tracking-[0.14em]">
+          {item.label}
+        </Link>
+      ))}
     </nav>
   );
 }
 
-function QuickLinksList({ items }: { items: readonly { href: string; label: string }[] }) {
-  return (
-    <div className="flex flex-col">
-      {items.map((item) => (
-        <Link
-          key={item.label}
-          href={item.href}
-          className="flex min-h-12 items-center justify-center border-b border-white/25 px-2 text-center text-[12px] uppercase tracking-[0.16em] text-white last:border-b-0 transition-colors duration-300 hover:bg-white hover:text-[#1a1a1a] lg:min-h-11 lg:text-[13px]"
-        >
-          {item.label}
-        </Link>
-      ))}
-    </div>
-  );
-}
-
-function SpinningFrame() {
-  return (
-    <svg
-      viewBox="0 0 100 100"
-      className="pointer-events-none absolute inset-[-10%] z-[1] h-[120%] w-[120%] animate-[spin_32s_linear_infinite] motion-reduce:animate-none"
-      fill="none"
-      aria-hidden="true"
-    >
-      <rect x="7" y="7" width="86" height="86" stroke="white" strokeOpacity="0.55" strokeWidth="1" />
-      <path d="M7 20V7h13" stroke="white" strokeOpacity="0.85" strokeWidth="1.6" />
-      <path d="M80 7h13v13" stroke="white" strokeOpacity="0.85" strokeWidth="1.6" />
-      <path d="M93 80v13H80" stroke="white" strokeOpacity="0.85" strokeWidth="1.6" />
-      <path d="M20 93H7V80" stroke="white" strokeOpacity="0.85" strokeWidth="1.6" />
-    </svg>
-  );
-}
