@@ -191,7 +191,7 @@ function SlideShell({
         if (target.closest('a, button')) event.stopPropagation();
       }}
     >
-      <div className="mx-auto flex w-full max-w-5xl flex-col items-center justify-center gap-10 lg:flex-row lg:items-center lg:justify-between xl:max-w-6xl">
+      <div className="mx-auto flex w-fit max-w-5xl flex-col items-center justify-center gap-8 lg:flex-row lg:items-center lg:gap-16 xl:gap-24">
         <div className="max-w-3xl text-center lg:text-left">{children}</div>
         <QuickLinksList items={links} />
       </div>
@@ -201,7 +201,7 @@ function SlideShell({
 
 function SlideActions({ onCallback, catalogHref }: { onCallback: () => void; catalogHref: string }) {
   return (
-    <div className="mt-7 flex w-full flex-col items-center gap-3 sm:flex-row sm:flex-wrap sm:justify-center lg:justify-start lg:items-start">
+    <div className="mt-7 flex w-full flex-col items-center gap-3 sm:flex-row sm:flex-wrap sm:justify-center lg:justify-start">
       <button
         type="button"
         className="btn-primary w-full max-w-xs px-5 sm:w-auto"
