@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { ADMIN_COOKIE, adminSessionToken, credentialsMatch } from '@/lib/admin-auth';
+import { ADMIN_COOKIE, adminCookieOptions, adminSessionToken, credentialsMatch } from '@/lib/admin-auth';
 
 export async function POST(request: Request) {
   let body: { login?: string; password?: string };
@@ -17,12 +17,6 @@ export async function POST(request: Request) {
   }
 
   const response = NextResponse.json({ ok: true });
-  response.cookies.set(ADMIN_COOKIE, await adminSessionToken(), {
-    httpOnly: true,
-    sameSite: 'lax',
-    secure: process.env.NODE_ENV === 'production',
-    path: '/',
-    maxAge: 60 * 60 * 24 * 7,
-  });
+  response.cookies.set(ADMIN_COOKIE, await adminSessionToken(), adminCookieOptions(60 * 60 * 24 * 7));
   return response;
 }

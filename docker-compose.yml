@@ -55,6 +55,9 @@ services:
     environment:
       NODE_ENV: production
       API_INTERNAL_URL: http://api:4000
+      COOKIE_SECURE: ${COOKIE_SECURE:-false}
+      ADMIN_UI_LOGIN: ${ADMIN_UI_LOGIN:-admin2026}
+      ADMIN_UI_PASSWORD: ${ADMIN_UI_PASSWORD:-admin2026!}
       TELEGRAM_BOT_TOKEN: ${TELEGRAM_BOT_TOKEN:-}
       TELEGRAM_CHAT_ID: ${TELEGRAM_CHAT_ID:-}
     depends_on:

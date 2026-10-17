@@ -18,3 +18,13 @@ export function credentialsMatch(login: string, password: string) {
   const creds = adminCredentials();
   return login === creds.login && password === creds.password;
 }
+
+export function adminCookieOptions(maxAge: number) {
+  return {
+    httpOnly: true,
+    sameSite: 'lax' as const,
+    secure: process.env.COOKIE_SECURE === 'true',
+    path: '/',
+    maxAge,
+  };
+}
