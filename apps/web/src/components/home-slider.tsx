@@ -12,24 +12,24 @@ const SLIDES = [
 ] as const;
 
 const QUICK_LINKS = [
-  { href: '/catalog?cat=pamyatniki', label: 'Памятники' },
-  { href: '/catalog?cat=pamyatniki&material=granite', label: 'Гранит' },
-  { href: '/catalog?cat=pamyatniki&sub=karelia', label: 'Карелия' },
+  { href: '/catalog?cat=pamyatniki#catalog-title', label: 'Памятники' },
+  { href: '/catalog?cat=pamyatniki&material=granite#catalog-title', label: 'Гранит' },
+  { href: '/catalog?cat=pamyatniki&sub=karelia#catalog-title', label: 'Карелия' },
   { href: '/services', label: 'Работы с камнем' },
 ] as const;
 
 const COMPLEX_PARTS = [
-  { href: '/catalog?cat=pamyatniki', label: 'Стела' },
-  { href: '/catalog?cat=kompleksy', label: 'Ограда' },
-  { href: '/catalog?cat=kompleksy', label: 'Цветник' },
-  { href: '/catalog?cat=izdeliya', label: 'Скамейка' },
+  { href: '/catalog?cat=pamyatniki#catalog-title', label: 'Стела' },
+  { href: '/catalog?cat=kompleksy#catalog-title', label: 'Ограда' },
+  { href: '/catalog?cat=kompleksy#catalog-title', label: 'Цветник' },
+  { href: '/catalog?cat=izdeliya#catalog-title', label: 'Скамейка' },
 ] as const;
 
 const GRANITE_LINKS = [
-  { href: '/catalog?cat=pamyatniki&sub=dymovskiy', label: 'Дымовский' },
-  { href: '/catalog?cat=pamyatniki&material=granite', label: 'Южно-Султаевский' },
-  { href: '/catalog?cat=pamyatniki&material=granite', label: 'Мансуровский' },
-  { href: '/catalog?cat=pamyatniki&material=granite', label: 'Другие граниты' },
+  { href: '/catalog?cat=pamyatniki&sub=dymovskiy#catalog-title', label: 'Дымовский' },
+  { href: '/catalog?cat=pamyatniki&material=granite#catalog-title', label: 'Южно-Султаевский' },
+  { href: '/catalog?cat=pamyatniki&material=granite#catalog-title', label: 'Мансуровский' },
+  { href: '/catalog?cat=pamyatniki&material=granite#catalog-title', label: 'Другие граниты' },
 ] as const;
 
 export function HomeSlider() {
@@ -249,7 +249,7 @@ function FirstSlideContent({ onCallback }: { onCallback: () => void }) {
         title="Памятники и изделия из камня"
         lineClassName="bg-[#c4a574]/80"
       />
-      <SlideActions onCallback={onCallback} catalogHref="/catalog?cat=pamyatniki" />
+      <SlideActions onCallback={onCallback} catalogHref="/catalog?cat=pamyatniki#catalog-title" />
     </SlideShell>
   );
 }
@@ -261,7 +261,7 @@ function SecondSlideContent({ onCallback }: { onCallback: () => void }) {
       <h2 className="mx-auto mt-5 max-w-[16ch] text-[26px] font-medium uppercase leading-[1.12] tracking-wide text-white sm:text-5xl lg:mx-0 lg:text-[56px]">
         Мемориальные комплексы
       </h2>
-      <SlideActions onCallback={onCallback} catalogHref="/catalog?cat=kompleksy" />
+      <SlideActions onCallback={onCallback} catalogHref="/catalog?cat=kompleksy#catalog-title" />
     </SlideShell>
   );
 }
@@ -270,7 +270,7 @@ function ThirdSlideContent({ onCallback }: { onCallback: () => void }) {
   return (
     <SlideShell links={GRANITE_LINKS}>
       <SlideLead eyebrow="Омск и вся Россия" title="Лестницы из гранита" />
-      <SlideActions onCallback={onCallback} catalogHref="/catalog?cat=oblitsovka" />
+      <SlideActions onCallback={onCallback} catalogHref="/catalog?cat=oblitsovka#catalog-title" />
     </SlideShell>
   );
 }

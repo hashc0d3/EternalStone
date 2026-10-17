@@ -49,30 +49,30 @@ export const OPT_CATEGORIES: CatalogCategory[] = [
 
 export const RETAIL_CARDS = [
   {
-    href: '/catalog?cat=pamyatniki',
+    href: '/catalog?cat=pamyatniki#catalog-title',
     image: '/images/catalog/1.png',
     title: 'Памятники',
     subtitle: 'Гранит',
   },
   {
-    href: '/catalog?cat=izdeliya',
+    href: '/catalog?cat=izdeliya#catalog-title',
     image: '/images/catalog/2.png',
     title: 'Изделия',
     subtitle: 'Вазы, скамейки',
   },
   {
-    href: '/catalog?cat=plitka',
+    href: '/catalog?cat=plitka#catalog-title',
     image: '/images/catalog/3.png',
     title: 'Плитка для могил',
   },
   {
-    href: '/catalog?cat=oblitsovka',
+    href: '/catalog?cat=oblitsovka#catalog-title',
     image: '/images/catalog/4.png',
     title: 'Облицовка',
     subtitle: 'Ступени, интерьеры, фасады',
   },
   {
-    href: '/catalog?cat=kompleksy',
+    href: '/catalog?cat=kompleksy#catalog-title',
     image: '/images/catalog/5.png',
     title: 'Комплексы',
   },
@@ -80,19 +80,19 @@ export const RETAIL_CARDS = [
 
 export const OPT_CARDS = [
   {
-    href: '/catalog?view=opt&cat=pamyatniki',
+    href: '/catalog?view=opt&cat=pamyatniki#catalog-title',
     image: '/images/catalog/1.png',
     title: 'Памятники',
     subtitle: 'Гранит и мрамор',
   },
   {
-    href: '/catalog?view=opt&cat=izdeliya',
+    href: '/catalog?view=opt&cat=izdeliya#catalog-title',
     image: '/images/catalog/2.png',
     title: 'Изделия',
     subtitle: 'Вазы, скамейки',
   },
   {
-    href: '/catalog?view=opt&cat=plitka',
+    href: '/catalog?view=opt&cat=plitka#catalog-title',
     image: '/images/catalog/3.png',
     title: 'Плитка для могил',
   },

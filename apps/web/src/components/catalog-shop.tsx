@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { CatalogSwitch } from '@/components/catalog-switch';
 import { LeadModal } from '@/components/lead-modal-lazy';
@@ -29,6 +29,17 @@ const SORTS: { id: CatalogSort; label: string }[] = [
   { id: 'price', label: 'По цене' },
 ];
 
+function scrollToCatalogHeading() {
+  const title = document.getElementById('catalog-title');
+  if (!title) return;
+  const header = Number.parseFloat(
+    getComputedStyle(document.documentElement).getPropertyValue('--header-height'),
+  );
+  const offset = Number.isFinite(header) ? header : 88;
+  const top = title.getBoundingClientRect().top + window.scrollY - offset;
+  window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+}
+
 export function CatalogShop() {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -42,6 +53,20 @@ export function CatalogShop() {
   const [orderProduct, setOrderProduct] = useState<CatalogProduct | null>(null);
   const [openMonuments, setOpenMonuments] = useState(Boolean(subcategory) || Boolean(material));
   const catalogProducts = useCatalogProducts();
+  const sectionKey = `${view}:${category ?? ''}:${subcategory ?? ''}:${material ?? ''}`;
+  const previousSection = useRef<string | null>(null);
+
+  useEffect(() => {
+    const isFirst = previousSection.current === null;
+    const changed = previousSection.current !== sectionKey;
+    previousSection.current = sectionKey;
+    if (isFirst && !category && !subcategory && !material) return;
+    if (!changed) return;
+    const frame = window.requestAnimationFrame(() => {
+      window.requestAnimationFrame(scrollToCatalogHeading);
+    });
+    return () => window.cancelAnimationFrame(frame);
+  }, [sectionKey, category, subcategory, material]);
 
   const products = useMemo(
     () =>
@@ -88,7 +113,7 @@ export function CatalogShop() {
       <div className="flex flex-wrap items-end justify-between gap-4 px-4 py-6 sm:px-6 sm:py-8 lg:px-8">
         <h1
           id="catalog-title"
-          className="text-[28px] font-light uppercase tracking-[0.12em] sm:text-4xl lg:text-5xl"
+          className="scroll-mt-[var(--header-height)] text-[28px] font-light uppercase tracking-[0.12em] sm:text-4xl lg:text-5xl"
         >
           <span className="text-white">Каталог</span>
         </h1>
