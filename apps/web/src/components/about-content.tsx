@@ -76,8 +76,8 @@ export function AboutContent() {
               Созидать <span className="text-white/40">искусство</span> из природной мощи
             </h1>
             <p className="relative mt-6 max-w-lg text-sm leading-relaxed text-white/60 sm:text-[15px]">
-              Наша миссия — делать из камня вещи, которые переживают поколения: памятники, комплексы и облицовку без
-              посредников.
+              Мы превращаем камень в наследие — создаём памятники, мемориальные комплексы и архитектурные решения,
+              рассчитанные на поколения.
             </p>
             <div className="relative mt-10 flex flex-wrap gap-3">
               <Link href="/catalog" className="btn-primary px-6">
